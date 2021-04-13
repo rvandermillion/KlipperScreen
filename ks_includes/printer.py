@@ -182,6 +182,12 @@ class Printer:
         for h in self.get_config_section_list("heater_generic "):
             heaters.append(h)
         return heaters
+    
+    def get_temperature_sensors(self):
+        temperature_sensors = []
+        for t in self.get_config_section_list("temperature_sensor "):
+            temperature_sensors.append(t)
+        return temperature_sensors
 
     def get_printer_status_data(self):
         data = {
