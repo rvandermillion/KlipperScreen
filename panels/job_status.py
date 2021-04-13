@@ -101,6 +101,15 @@ class JobStatusPanel(ScreenPanel):
             heater_bed_box.add(heater_bed)
             heater_bed_box.add(self.labels['heater_bed'])
             temp_grid.attach(heater_bed_box, 1, 0, 1, 1)
+            
+        if self._printer.has_chamber_sensor():
+            temperature_sensor_chamber = self._gtk.Image("heat-up.svg", None, .6, .6)
+            self.labels['temperature_sensor chamber'] = Gtk.Label(label="")
+            self.labels['temperature_sensor chamber'].get_style_context().add_class("printing-info")
+            temperature_sensor_chamber_box = Gtk.Box(spacing=0)
+            temperature_sensor_chamber_box.add(temperature_sensor_chamber)
+            temperature_sensor_chamber_box.add(self.labels['temperature_sensor chamber'])
+            temp_grid.attach(temperature_sensor_chamber_box, 2, 0, 1, 1)            
         self.labels['temp_grid'] = temp_grid
 
         # Create time remaining items
