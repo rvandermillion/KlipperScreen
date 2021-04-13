@@ -40,7 +40,7 @@ class MainPanel(MenuPanel):
             else:
                 name = " ".join(t.split(" ")[1:])
                 self.labels[t] = self._gtk.ButtonImage("heat-up", name)
-            self.sensors.append(t)
+            self.temperatures.append(t)
 
         i = 0
         cols = 3 if len(self.temperatures) > 4 else (1 if len(self.temperatures) <= 2 else 2)
