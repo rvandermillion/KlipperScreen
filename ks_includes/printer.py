@@ -98,7 +98,7 @@ class Printer:
                 for y in data[x]:
                     self.data[x][y] = data[x][y]
 
-        for x in (self.get_tools() + self.get_heaters()):
+        for x in (self.get_tools() + self.get_heaters() + self.get_temperature_sensors()):
             if x in data:
                 d = data[x]
                 for i in d:
