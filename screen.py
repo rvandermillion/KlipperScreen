@@ -245,7 +245,7 @@ class KlipperScreen(Gtk.Window):
         for h in self.printer.get_heaters():
             requested_updates['objects'][h] = ["target","temperature"]
         for t in self.printer.get_temperature_sensors():
-            requested_updates['objects'][h] = ["temperature"]
+            requested_updates['objects'][t] = ["temperature"]
 
         self._ws.klippy.object_subscription(requested_updates)
 
