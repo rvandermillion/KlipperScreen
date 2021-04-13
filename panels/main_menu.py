@@ -25,27 +25,27 @@ class MainPanel(MenuPanel):
         eq_grid.set_hexpand(True)
         eq_grid.set_vexpand(True)
 
-        self.heaters = []
+        self.temperatures = []
 
         i = 0
         for x in self._printer.get_tools():
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.heaters.append(x)
+            self.temperatures.append(x)
             i += 1
 
-        add_heaters = self._printer.get_heaters()
-        for h in add_heaters:
-            if h == "heater_bed":
-                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+        add_temperatures = self._printer.get_heaters() + self._printer.get_temperature_sensors()
+        for t in add_temperatures:
+            if t == "heater_bed":
+                self.labels[t] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
             else:
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
-            self.heaters.append(h)
+                name = " ".join(t.split(" ")[1:])
+                self.labels[t] = self._gtk.ButtonImage("heat-up", name)
+            self.sensors.append(t)
 
         i = 0
-        cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
-        for h in self.heaters:
-            eq_grid.attach(self.labels[h], i%cols, int(i/cols), 1, 1)
+        cols = 3 if len(self.temperatures) > 4 else (1 if len(self.temperatures) <= 2 else 2)
+        for t in self.temperatures:
+            eq_grid.attach(self.labels[t], i%cols, int(i/cols), 1, 1)
             i += 1
 
         self.items = items
@@ -87,5 +87,11 @@ class MainPanel(MenuPanel):
                 self._printer.get_dev_stat(h,"temperature"),
                 self._printer.get_dev_stat(h,"target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
+            )
+        for t in self._printer.get_temperature_sensors():
+            self.update_temp(t,
+                self._printer.get_dev_stat(h,"temperature"),
+                0,
+                " ".join(t.split(" ")[1:])
             )
         return
