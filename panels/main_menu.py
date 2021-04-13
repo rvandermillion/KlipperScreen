@@ -90,7 +90,7 @@ class MainPanel(MenuPanel):
             )
         for t in self._printer.get_temperature_sensors():
             self.update_temp(t,
-                self._printer.get_dev_stat(h,"temperature"),
+                self._printer.get_dev_stat(t,"temperature"),
                 0,
                 " ".join(t.split(" ")[1:])
             )
