@@ -268,6 +268,10 @@ class Printer:
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
             return True
+        
+    def has_chamber_sensor(self):
+        if "temperature_sensor chamber" in self.devices:
+            return True        
 
     def section_exists(self, section):
         if section in self.get_config_section_list():
